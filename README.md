@@ -21,8 +21,7 @@ to build and start the flask server.
 Navigate to localhost:5000 in your browser.
 
 ## High Level Architecture
-The overarching objective was to minimize the amount of code I had to write, while
-keeping the product presentable.
+The overarching objective was to keep the project simple and minimize the amount of code written.
 
 1. Backend is in flask / postgres using psycopg2 as a db client
 2. Frontend (/static) is a forked react-material example template

@@ -1,0 +1,49 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <link rel="stylesheet", href="styles.css"/>
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-alpha.3/css/materialize.min.css">
+
+    <script>
+        async function loadChart() {
+            const qid = (new URLSearchParams(location.search.slice(1))).get('qid');
+            const question = (await axios.get(`api/questions/${qid}`)).data;
+            const votes = (await axios.get(`api/questions/${qid}/votes`)).data;
+            const data = Object.entries(votes).map(e => {
+                return {y: e[1], label: e[0]};
+            });
+            const total = _.sum(Object.values(votes));
+
+            const chart = new CanvasJS.Chart("chart-container", {
+                animationEnabled: true,
+                title: {
+                    text: `${question.question} - ${total} Total Votes`,
+                    horizontalAlign: 'left'
+                },
+                data: [{
+                    type: 'doughnut',
+                    startAngle: 60,
+                    //innerRadius: 60,
+                    indexLabelFontSize: 17,
+                    indexLabel: '{label} - #percent%',
+                    toolTipContent: "<b>{label}:</b> {y} (#percent%)",
+                    dataPoints: data
+                }]
+            });
+            chart.render();
+        }
+
+        window.onload = loadChart;
+    </script>
+    <title>Results</title>
+</head>
+<body class="votes_page">
+<div class="card">
+    <div id="chart-container"></div>
+</div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.17.1/axios.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/lodash@4.17.5/lodash.min.js"></script>
+<script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
+</body>
+</html>

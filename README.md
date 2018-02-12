@@ -1,7 +1,13 @@
 # PollRly.io
-A revolutionary startup that will change the way the world responds to surveys.
+Simple web app that generates a random question which the user can vote on. After voting, the user will see a donut 
+chart that breaks down votes by percentage and count.
 
 ![](doc_images/pollr_demo.gif)
+
+Uses:
+1. flask for backend
+2. Postgres for persistence
+3. react-material for frontend
 
 ## Prereqs/assumptions
 1. You're running on osx and have python3/pip3 already available
@@ -20,26 +26,15 @@ to build and start the flask server.
 
 Navigate to localhost:5000 in your browser.
 
-## High Level Architecture
-The overarching objective was to keep the project simple and minimize the amount of code written.
-
-1. Backend is in flask / postgres using psycopg2 as a db client
-2. Frontend (/static) is a forked react-material example template
-
 ## API browser
-Flask-API provides an API browser for free:
+Flask-API provides a swagger-like API browser for free.
 
-[Question list](http://localhost:5000/api/questions):
+Example:
 ![](doc_images/questions_list.png)
 
-[Question detail](http://localhost:5000/api/questions/1):
-![](doc_images/question_detail.png)
-
-[Random Question](http://localhost:5000/api/questions/random):
-![](doc_images/question_random.png)
-
-[Votes detail](http://localhost:5000/api/questions/1/votes):
-![](doc_images/votes_detail.png)
-
-[Vote for option](http://localhost:5000/api/questions/1/votes/0):
-![](doc_images/vote_for_option.png)
+API endpoints:
+1. [List/Create questions](http://localhost:5000/api/questions)
+2. [Show/Delete a question](http://localhost:5000/api/questions/1)
+3. [Show a random question](http://localhost:5000/api/questions/random)
+4. [Show votes for a question](http://localhost:5000/api/questions/1/votes):
+5. [Cast a vote for a question option](http://localhost:5000/api/questions/1/votes/0):

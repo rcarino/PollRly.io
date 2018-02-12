@@ -4,8 +4,8 @@ chart that breaks down votes by percentage and count.
 
 ![](doc_images/pollr_demo.gif)
 
-Uses:
-1. flask for backend
+Made with:
+1. flask/python3 for backend
 2. Postgres for persistence
 3. react-material for frontend
 
